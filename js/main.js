@@ -72,6 +72,12 @@
         });
       },
     });
+
+    ScrollTrigger.addEventListener('refreshInit', () => {
+      video.currentTime = 0;
+    });
+
+    window.addEventListener('resize', () => ScrollTrigger.refresh());
   }
 
   function findCategory(id) {
