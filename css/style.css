@@ -344,3 +344,34 @@ a {
     grid-template-columns: 1fr;
   }
 }
+
+#about {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  padding: 10% 8%;
+  max-width: 720px;
+}
+
+#about h2 {
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+#about p {
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+#about .contact {
+  font-size: 14px;
+  color: var(--color-muted);
+}
+
+#about .contact a {
+  text-decoration: underline;
+}
