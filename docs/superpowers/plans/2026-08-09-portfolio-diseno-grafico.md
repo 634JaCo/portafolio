@@ -1,6 +1,6 @@
 # Portfolio de Diseñador Gráfico Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Build a static, scroll-driven portfolio site where an 8-second video pans the user from a back-view to a front-view as they scroll, revealing a kinetic-typography service menu that opens full-screen category panels.
 
@@ -45,7 +45,7 @@ portfolio-diseñador/
 - Create: `assets/video/hero-pan.mp4` (copy)
 - Create: `assets/img/placeholder.svg`
 
-- [ ] **Step 1: Create the folder structure and copy the hero video**
+- [x] **Step 1: Create the folder structure and copy the hero video**
 
 Run:
 ```bash
@@ -56,7 +56,7 @@ cp "../design portfolio/animacion portfolio hero.mp4" "assets/video/hero-pan.mp4
 
 Expected: `assets/video/hero-pan.mp4` exists and is ~2.3MB (same size as the source file).
 
-- [ ] **Step 2: Create the generic placeholder image**
+- [x] **Step 2: Create the generic placeholder image**
 
 Create `assets/img/placeholder.svg`:
 
@@ -70,7 +70,7 @@ Create `assets/img/placeholder.svg`:
 </svg>
 ```
 
-- [ ] **Step 3: Create empty entry files so later tasks have a target**
+- [x] **Step 3: Create empty entry files so later tasks have a target**
 
 Create `index.html` with just:
 ```html
@@ -90,7 +90,7 @@ Create `css/style.css` with just:
 /* filled in Task 6 */
 ```
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add -A
@@ -105,7 +105,7 @@ git commit -m "chore: scaffold project structure and add hero video asset"
 - Create: `js/categories-data.js`
 - Test: `js/tests/categories-data.test.js`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `js/tests/categories-data.test.js`:
 
@@ -149,12 +149,12 @@ test('every category has the required shape', () => {
 });
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
 Run: `node --test js/tests/categories-data.test.js`
 Expected: FAIL — `Cannot find module '../categories-data.js'`
 
-- [ ] **Step 3: Write the implementation**
+- [x] **Step 3: Write the implementation**
 
 Create `js/categories-data.js`:
 
@@ -194,12 +194,12 @@ Create `js/categories-data.js`:
 })(typeof window !== 'undefined' ? window : globalThis);
 ```
 
-- [ ] **Step 4: Run the test to verify it passes**
+- [x] **Step 4: Run the test to verify it passes**
 
 Run: `node --test js/tests/categories-data.test.js`
 Expected: PASS — 3 tests, 0 failures
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add js/categories-data.js js/tests/categories-data.test.js
@@ -214,7 +214,7 @@ git commit -m "feat: add category data module with placeholder content"
 - Create: `js/scroll-utils.js`
 - Test: `js/tests/scroll-utils.test.js`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `js/tests/scroll-utils.test.js`:
 
@@ -241,12 +241,12 @@ test('mapProgressToTime clamps out-of-range progress', () => {
 });
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
 Run: `node --test js/tests/scroll-utils.test.js`
 Expected: FAIL — `Cannot find module '../scroll-utils.js'`
 
-- [ ] **Step 3: Write the implementation**
+- [x] **Step 3: Write the implementation**
 
 Create `js/scroll-utils.js`:
 
@@ -270,12 +270,12 @@ Create `js/scroll-utils.js`:
 })(typeof window !== 'undefined' ? window : globalThis);
 ```
 
-- [ ] **Step 4: Run the test to verify it passes**
+- [x] **Step 4: Run the test to verify it passes**
 
 Run: `node --test js/tests/scroll-utils.test.js`
 Expected: PASS — 3 tests, 0 failures
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add js/scroll-utils.js js/tests/scroll-utils.test.js
@@ -290,7 +290,7 @@ git commit -m "feat: add pure scroll-to-video-time mapping utility"
 - Create: `js/router.js`
 - Test: `js/tests/router.test.js`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `js/tests/router.test.js`:
 
@@ -317,12 +317,12 @@ test('buildHashForCategory prefixes the id with #', () => {
 });
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
 Run: `node --test js/tests/router.test.js`
 Expected: FAIL — `Cannot find module '../router.js'`
 
-- [ ] **Step 3: Write the implementation**
+- [x] **Step 3: Write the implementation**
 
 Create `js/router.js`:
 
@@ -348,17 +348,17 @@ Create `js/router.js`:
 })(typeof window !== 'undefined' ? window : globalThis);
 ```
 
-- [ ] **Step 4: Run the test to verify it passes**
+- [x] **Step 4: Run the test to verify it passes**
 
 Run: `node --test js/tests/router.test.js`
 Expected: PASS — 3 tests, 0 failures
 
-- [ ] **Step 5: Run the full test suite together**
+- [x] **Step 5: Run the full test suite together**
 
 Run: `node --test js/tests/`
 Expected: PASS — 9 tests total (3 files × 3 tests), 0 failures
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add js/router.js js/tests/router.test.js
@@ -373,7 +373,7 @@ git commit -m "feat: add hash routing utilities for category deep-linking"
 - Modify: `index.html`
 - Modify: `css/style.css`
 
-- [ ] **Step 1: Write the full HTML skeleton**
+- [x] **Step 1: Write the full HTML skeleton**
 
 Replace `index.html`:
 
@@ -438,7 +438,7 @@ Replace `index.html`:
 </html>
 ```
 
-- [ ] **Step 2: Write base CSS reset and design tokens**
+- [x] **Step 2: Write base CSS reset and design tokens**
 
 Replace `css/style.css`:
 
@@ -477,12 +477,12 @@ a {
 }
 ```
 
-- [ ] **Step 3: Manually verify**
+- [x] **Step 3: Manually verify**
 
 Open `index.html` directly in a browser (double-click the file, or `start index.html` on Windows).
 Expected: blank page loads with no console errors (menu list and panel are empty/hidden — that's expected, they're filled in later tasks). Open DevTools console and confirm no red errors.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add index.html css/style.css
@@ -496,7 +496,7 @@ git commit -m "feat: add HTML skeleton and base design tokens"
 **Files:**
 - Modify: `css/style.css`
 
-- [ ] **Step 1: Add hero CSS**
+- [x] **Step 1: Add hero CSS**
 
 Append to `css/style.css`:
 
@@ -566,12 +566,12 @@ Append to `css/style.css`:
 }
 ```
 
-- [ ] **Step 2: Manually verify**
+- [x] **Step 2: Manually verify**
 
 Reload `index.html` in the browser.
 Expected: the hero fills the viewport with a black background (video won't play yet — no JS wiring until Task 8), the CTA button is visible centered near the top. Scrolling the page should move past a tall (250vh) hero section since the pin isn't wired up yet — that's expected, `position: sticky` alone doesn't pin without a taller ancestor, which `#hero-pin-spacer` provides. Confirm the button and black hero box render without layout errors.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add css/style.css
@@ -586,7 +586,7 @@ git commit -m "feat: add hero pin-spacer layout and CTA button styling"
 - Modify: `css/style.css`
 - Modify: `js/main.js` (create)
 
-- [ ] **Step 1: Add kinetic menu CSS**
+- [x] **Step 1: Add kinetic menu CSS**
 
 Append to `css/style.css`:
 
@@ -634,7 +634,7 @@ Append to `css/style.css`:
 .menu-item:nth-child(5) { transform: rotate(2deg); }
 ```
 
-- [ ] **Step 2: Create main.js and render the menu from category data**
+- [x] **Step 2: Create main.js and render the menu from category data**
 
 Create `js/main.js`:
 
@@ -672,12 +672,12 @@ Create `js/main.js`:
 })();
 ```
 
-- [ ] **Step 3: Manually verify**
+- [x] **Step 3: Manually verify**
 
 Reload `index.html`. Menu won't be visible yet (`#service-menu` has `opacity: 0` until Task 8 wires the scroll reveal) — temporarily add `.is-visible { opacity: 1 !important; }` to DevTools' element inspector on `#service-menu`, or open DevTools console and run `document.getElementById('service-menu').style.opacity = 1`.
 Expected: 5 items — Branding, Content Creator, B2B Design, Web Design, AI Creator — appear stacked on the right, each with a slight rotation. Hovering one enlarges it, makes it bold, and reveals the `→` arrow while the others stay dim.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add css/style.css js/main.js
@@ -691,7 +691,7 @@ git commit -m "feat: render kinetic service menu and add hover interaction"
 **Files:**
 - Modify: `js/main.js`
 
-- [ ] **Step 1: Add the ScrollTrigger setup**
+- [x] **Step 1: Add the ScrollTrigger setup**
 
 In `js/main.js`, replace the whole file with:
 
@@ -767,7 +767,7 @@ In `js/main.js`, replace the whole file with:
 })();
 ```
 
-- [ ] **Step 2: Manually verify**
+- [x] **Step 2: Manually verify**
 
 Reload `index.html` (serve it via a local server if the browser blocks `<video>` on `file://` — run `npx http-server .` or Python's `python -m http.server` from the project root and open `http://localhost:8080`).
 
@@ -778,7 +778,7 @@ Expected:
 - Around 85% through the pinned scroll range, the 5 menu items start fading/sliding in one after another; by 100% all 5 are at their dim resting opacity (0.35), ready to be hovered.
 - After the pinned range ends, normal scrolling continues into the "Sobre mí" section.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add js/main.js
@@ -792,7 +792,7 @@ git commit -m "feat: wire GSAP ScrollTrigger to scrub hero video and reveal menu
 **Files:**
 - Modify: `css/style.css`
 
-- [ ] **Step 1: Add panel CSS**
+- [x] **Step 1: Add panel CSS**
 
 Append to `css/style.css`:
 
@@ -887,12 +887,12 @@ Append to `css/style.css`:
 }
 ```
 
-- [ ] **Step 2: Manually verify**
+- [x] **Step 2: Manually verify**
 
 In DevTools, remove the `hidden` attribute from `#category-panel` on the live page.
 Expected: a full-screen panel appears with the "← volver" button, an empty featured-image box, empty title/description, an empty 4-column project grid, and two empty large blocks below — all laid out without overlap. Re-add the `hidden` attribute afterward.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add css/style.css
@@ -906,7 +906,7 @@ git commit -m "feat: style the full-screen category panel layout"
 **Files:**
 - Modify: `js/main.js`
 
-- [ ] **Step 1: Add panel rendering and open/close logic**
+- [x] **Step 1: Add panel rendering and open/close logic**
 
 In `js/main.js`, add these functions inside the top-level IIFE (after `setupHeroScrub`, before the `DOMContentLoaded` listener):
 
@@ -1008,12 +1008,12 @@ Then update the `DOMContentLoaded` listener at the bottom of the file to:
 
 Also replace the CSS transform-based hide with a GSAP-friendly initial state — in `css/style.css`, change the `.category-panel` rule's `transform: translateX(100%);` line to `transform: translateX(100%); will-change: transform;` (no functional change, just documents intent — skip if you prefer to leave it as-is, GSAP overrides inline styles regardless).
 
-- [ ] **Step 2: Manually verify**
+- [x] **Step 2: Manually verify**
 
 Reload the page (via local server), scroll through the hero until the menu is visible, then click "Web Design".
 Expected: the panel slides in from the right showing "Web Design" as the title, the placeholder description text, 4 project cards captioned "Proyecto Web Design 1"–"4" with the fallback placeholder image (since the real JPGs don't exist yet), and 2 large blocks with the fallback image. Click "← volver" — the panel slides back out and `hidden` is restored (check in DevTools). Repeat for all 5 categories to confirm each renders its own data.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add js/main.js css/style.css
@@ -1027,7 +1027,7 @@ git commit -m "feat: open and close category panel with data-driven content"
 **Files:**
 - Modify: `js/main.js`
 
-- [ ] **Step 1: Add hash-driven open logic and popstate handling**
+- [x] **Step 1: Add hash-driven open logic and popstate handling**
 
 In `js/main.js`, add this function after `setupPanelInteractions`:
 
@@ -1081,12 +1081,12 @@ Update `DOMContentLoaded` to check the initial hash and listen for future change
   });
 ```
 
-- [ ] **Step 2: Manually verify**
+- [x] **Step 2: Manually verify**
 
 Serve the site locally, then load `http://localhost:8080/#branding` directly (paste it into the address bar as a fresh navigation, not a click from within the page).
 Expected: the page loads with the hero already scrolled to the front-view frame (no back-view flash), the menu visible, and the "Branding" panel already open — all without the user scrolling first. Then click "← volver": the panel closes and the URL hash clears. Use the browser's back/forward buttons after opening a couple of different categories to confirm they open/close accordingly.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add js/main.js
@@ -1101,7 +1101,7 @@ git commit -m "feat: support direct-link deep linking to a category via URL hash
 - Modify: `css/style.css`
 - Modify: `js/main.js`
 
-- [ ] **Step 1: Add the mobile CSS override**
+- [x] **Step 1: Add the mobile CSS override**
 
 Append to `css/style.css`:
 
@@ -1151,7 +1151,7 @@ Append to `css/style.css`:
 }
 ```
 
-- [ ] **Step 2: Make the pin-spacer height mirror the CSS breakpoint in JS**
+- [x] **Step 2: Make the pin-spacer height mirror the CSS breakpoint in JS**
 
 The `ScrollTrigger` in `setupHeroScrub` already uses `end: 'bottom bottom'`, which reads `#hero-pin-spacer`'s actual rendered height — since that height now changes at the 768px breakpoint via CSS, no JS duplication of the `160vh`/`250vh` values is needed. Add a resize handler so ScrollTrigger recalculates when the viewport crosses the breakpoint (e.g. device rotation): in `setupHeroScrub`, after the `ScrollTrigger.create({...})` call, add:
 
@@ -1167,12 +1167,12 @@ and at the end of `setupHeroScrub` add:
     window.addEventListener('resize', () => ScrollTrigger.refresh());
 ```
 
-- [ ] **Step 3: Manually verify**
+- [x] **Step 3: Manually verify**
 
 Open DevTools' responsive/device mode at a width under 768px (e.g. 375px).
 Expected: the hero's scrollable range is visibly shorter than on desktop, the service menu renders as a plain left-aligned stacked list below the video (no rotation/skew) once revealed, and opening a category panel shows a single-column header, a 2-column project grid, and stacked large blocks. Resize the viewport across the 768px boundary and confirm the page doesn't visually break or throw console errors.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add css/style.css js/main.js
@@ -1187,7 +1187,7 @@ git commit -m "feat: adapt hero scrub length and menu layout for mobile viewport
 - Modify: `css/style.css`
 - Create: `README.md`
 
-- [ ] **Step 1: Style the about section**
+- [x] **Step 1: Style the about section**
 
 Append to `css/style.css`:
 
@@ -1224,7 +1224,7 @@ Append to `css/style.css`:
 }
 ```
 
-- [ ] **Step 2: Write the README**
+- [x] **Step 2: Write the README**
 
 Create `README.md`:
 
@@ -1264,12 +1264,12 @@ node --test js/tests/
 ```
 ```
 
-- [ ] **Step 3: Manually verify**
+- [x] **Step 3: Manually verify**
 
 Reload the page and scroll to the "Sobre mí" section.
 Expected: readable bio placeholder text and contact links, styled consistently with the rest of the page, no layout overflow.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add css/style.css README.md
