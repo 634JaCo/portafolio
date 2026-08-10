@@ -94,3 +94,45 @@ a {
   gap: 10px;
   text-align: right;
 }
+
+.menu-item {
+  font-size: 15px;
+  color: #fff;
+  opacity: 0.35;
+  cursor: pointer;
+  transition: opacity 0.25s ease, font-size 0.25s ease, font-weight 0.25s ease;
+  white-space: nowrap;
+}
+
+.menu-item a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.menu-item .arrow {
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.menu-item:hover,
+.menu-item:focus-within {
+  opacity: 1;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.menu-item:hover .arrow,
+.menu-item:focus-within .arrow {
+  opacity: 1;
+}
+
+/* leve inclinación aleatoria por ítem, fiel a la referencia visual */
+.menu-item:nth-child(1) { transform: rotate(-2deg); }
+.menu-item:nth-child(2) { transform: rotate(-1deg); }
+.menu-item:nth-child(3) { transform: rotate(0deg); }
+.menu-item:nth-child(4) { transform: rotate(1deg); }
+.menu-item:nth-child(5) { transform: rotate(2deg); }
