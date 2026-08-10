@@ -135,3 +135,92 @@ a {
    translateX on every ScrollTrigger tick. An inline style always wins over a
    stylesheet rule, so a CSS nth-child rotate() rule here would never actually
    take effect — see js/main.js for the single source of truth. */
+
+.category-panel {
+  position: fixed;
+  inset: 0;
+  background: var(--color-panel-bg);
+  z-index: 10;
+  overflow-y: auto;
+  padding: 32px 6%;
+  transform: translateX(100%);
+}
+
+.category-panel[hidden] {
+  display: none;
+}
+
+#panel-close {
+  background: none;
+  border: none;
+  font-size: 13px;
+  letter-spacing: 1px;
+  margin-bottom: 24px;
+}
+
+.panel-header {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.panel-featured-image img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  display: block;
+  background: #d9d6d0;
+}
+
+.panel-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--color-muted);
+  text-transform: uppercase;
+}
+
+.panel-intro h2 {
+  font-size: 32px;
+  font-weight: 800;
+  margin: 8px 0;
+}
+
+.panel-projects {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.panel-projects figure {
+  margin: 0;
+}
+
+.panel-projects img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  background: #d9d6d0;
+  display: block;
+}
+
+.panel-projects figcaption {
+  font-size: 12px;
+  margin-top: 6px;
+  color: var(--color-muted);
+}
+
+.panel-large-blocks {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.panel-large-blocks img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  background: #d9d6d0;
+  display: block;
+}
