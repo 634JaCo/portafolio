@@ -31,11 +31,12 @@
     const menu = document.getElementById('service-menu');
     const menuItems = Array.from(document.querySelectorAll('.menu-item'));
 
-    // Per-item resting rotation, matching the nth-child(1..5) rules in css/style.css.
-    // Used only while an item is still sliding in (below); once an item's entrance
+    // Resting rotation shared by every item, matching .menu-item in css/style.css so
+    // the whole list leans uniformly instead of each item tilting differently. Used
+    // only while an item is still sliding in (below); once an item's entrance
     // finishes, its inline transform/opacity are cleared so the CSS rules (and the
     // :hover override that snaps it level) take over.
-    const MENU_ITEM_ROTATIONS = [-7, 4, -4, 6, -5];
+    const MENU_ITEM_REST_ROTATION = -4;
     const VIDEO_FRAME_RATE = 24;
     const FRAME_DURATION = 1 / VIDEO_FRAME_RATE;
 
@@ -70,8 +71,7 @@
           const itemStart = index * 0.08;
           const itemProgress = ScrollUtils.clamp((menuProgress - itemStart) / (1 - itemStart), 0, 1);
           if (itemProgress < 1) {
-            const rotation = MENU_ITEM_ROTATIONS[index] || 0;
-            item.style.transform = `rotate(${rotation}deg) translateX(${(1 - itemProgress) * -24}px)`;
+            item.style.transform = `rotate(${MENU_ITEM_REST_ROTATION}deg) translateX(${(1 - itemProgress) * -24}px)`;
             item.style.opacity = String(itemProgress);
           } else {
             item.style.transform = '';

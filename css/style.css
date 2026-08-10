@@ -103,6 +103,7 @@ a {
   cursor: pointer;
   white-space: nowrap;
   filter: blur(3px);
+  transform: rotate(-4deg);
   transition: filter 0.3s ease, font-size 0.25s ease, transform 0.25s ease;
 }
 
@@ -120,15 +121,12 @@ a {
   transition: opacity 0.25s ease;
 }
 
-/* Resting tilt per item — the scroll-reveal in js/main.js drives opacity and
-   transform inline while an item is still animating in, then hands both back
-   to CSS (clears the inline styles) once that item's entrance finishes, so
-   these rules and the :hover override below take over. */
-.menu-item:nth-child(1) { transform: rotate(-7deg); }
-.menu-item:nth-child(2) { transform: rotate(4deg); }
-.menu-item:nth-child(3) { transform: rotate(-4deg); }
-.menu-item:nth-child(4) { transform: rotate(6deg); }
-.menu-item:nth-child(5) { transform: rotate(-5deg); }
+/* All items share the same resting tilt (set on .menu-item above) so the list
+   reads as one coherent, uniformly-leaning block rather than a scattered mix
+   of angles. The scroll-reveal in js/main.js drives opacity and transform
+   inline while an item is still animating in, then hands both back to CSS
+   (clears the inline styles) once that item's entrance finishes, so the base
+   rule and the :hover override below take over. */
 
 .menu-item:hover,
 .menu-item:focus-within {
