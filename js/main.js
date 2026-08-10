@@ -112,9 +112,19 @@
     const blocksEl = document.getElementById('panel-large-blocks');
     blocksEl.innerHTML = '';
     category.largeBlocks.forEach((block) => {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'large-block';
+
       const img = document.createElement('img');
       setImageWithFallback(img, block.image, block.title);
-      blocksEl.appendChild(img);
+
+      const label = document.createElement('span');
+      label.className = 'large-block-label';
+      label.textContent = block.title;
+
+      wrapper.appendChild(img);
+      wrapper.appendChild(label);
+      blocksEl.appendChild(wrapper);
     });
   }
 
