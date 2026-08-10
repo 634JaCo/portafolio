@@ -2,8 +2,57 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio — Diseño Gráfico</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+  <section id="hero">
+    <div id="hero-pin-spacer">
+      <div id="hero-sticky">
+        <video id="hero-video" src="assets/video/hero-pan.mp4" muted playsinline preload="auto"></video>
+
+        <button id="cta-button" type="button">Conocer portafolio ↓</button>
+
+        <nav id="service-menu" aria-label="Servicios">
+          <ul id="service-menu-list"></ul>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>Sobre mí</h2>
+    <p>[Bio de ejemplo — reemplaza este texto con tu propia presentación como diseñador.]</p>
+    <p class="contact">
+      <a href="mailto:tucorreo@ejemplo.com">tucorreo@ejemplo.com</a>
+      · <a href="#">Instagram</a>
+      · <a href="#">LinkedIn</a>
+    </p>
+  </section>
+
+  <div id="category-panel" class="category-panel" hidden>
+    <button id="panel-close" type="button">← volver</button>
+    <div class="panel-header">
+      <div class="panel-featured-image">
+        <img id="panel-featured-img" src="" alt="">
+      </div>
+      <div class="panel-intro">
+        <p class="panel-label" id="panel-label"></p>
+        <h2 id="panel-title"></h2>
+        <p id="panel-description"></p>
+      </div>
+    </div>
+    <div class="panel-projects" id="panel-projects"></div>
+    <div class="panel-large-blocks" id="panel-large-blocks"></div>
+  </div>
+
+  <script src="js/categories-data.js"></script>
+  <script src="js/scroll-utils.js"></script>
+  <script src="js/router.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
