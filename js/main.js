@@ -65,9 +65,9 @@
         menuItems.forEach((item, index) => {
           const itemStart = index * 0.08;
           const itemProgress = ScrollUtils.clamp((menuProgress - itemStart) / (1 - itemStart), 0, 1);
-          item.style.opacity = String(0.35 * itemProgress + (item.matches(':hover') ? 0.65 * itemProgress : 0));
           const rotation = MENU_ITEM_ROTATIONS[index] || 0;
           item.style.transform = `rotate(${rotation}deg) translateX(${(1 - itemProgress) * 24}px)`;
+          item.style.opacity = itemProgress < 1 ? String(0.35 * itemProgress) : '';
         });
       },
     });
