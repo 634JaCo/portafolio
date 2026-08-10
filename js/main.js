@@ -73,8 +73,93 @@
     });
   }
 
+  function findCategory(id) {
+    return CATEGORIES.find((category) => category.id === id) || null;
+  }
+
+  function setImageWithFallback(imgEl, src, alt) {
+    imgEl.alt = alt;
+    imgEl.onerror = () => {
+      imgEl.onerror = null;
+      imgEl.src = 'assets/img/placeholder.svg';
+    };
+    imgEl.src = src;
+  }
+
+  function renderCategoryPanel(category) {
+    document.getElementById('panel-label').textContent = category.label;
+    document.getElementById('panel-title').textContent = category.title;
+    document.getElementById('panel-description').textContent = category.description;
+    setImageWithFallback(
+      document.getElementById('panel-featured-img'),
+      category.featuredImage,
+      category.title
+    );
+
+    const projectsEl = document.getElementById('panel-projects');
+    projectsEl.innerHTML = '';
+    category.projects.forEach((project) => {
+      const figure = document.createElement('figure');
+      const img = document.createElement('img');
+      setImageWithFallback(img, project.image, project.title);
+      const caption = document.createElement('figcaption');
+      caption.textContent = project.title;
+      figure.appendChild(img);
+      figure.appendChild(caption);
+      projectsEl.appendChild(figure);
+    });
+
+    const blocksEl = document.getElementById('panel-large-blocks');
+    blocksEl.innerHTML = '';
+    category.largeBlocks.forEach((block) => {
+      const img = document.createElement('img');
+      setImageWithFallback(img, block.image, block.title);
+      blocksEl.appendChild(img);
+    });
+  }
+
+  function openCategoryPanel(id) {
+    const category = findCategory(id);
+    if (!category) return;
+
+    renderCategoryPanel(category);
+
+    const panel = document.getElementById('category-panel');
+    panel.hidden = false;
+    gsap.fromTo(panel, { xPercent: 100 }, { xPercent: 0, duration: 0.5, ease: 'power2.out' });
+  }
+
+  function closeCategoryPanel() {
+    const panel = document.getElementById('category-panel');
+    gsap.to(panel, {
+      xPercent: 100,
+      duration: 0.4,
+      ease: 'power2.in',
+      onComplete: () => {
+        panel.hidden = true;
+      },
+    });
+  }
+
+  function setupPanelInteractions() {
+    document.getElementById('service-menu-list').addEventListener('click', (event) => {
+      const link = event.target.closest('a[href^="#"]');
+      if (!link) return;
+      event.preventDefault();
+      const id = link.getAttribute('href').replace(/^#/, '');
+      history.pushState(null, '', Router.buildHashForCategory(id));
+      openCategoryPanel(id);
+    });
+
+    document.getElementById('panel-close').addEventListener('click', () => {
+      history.pushState(null, '', location.pathname + location.search);
+      closeCategoryPanel();
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     renderServiceMenu();
     setupHeroScrub();
+    setupPanelInteractions();
   });
 })();
