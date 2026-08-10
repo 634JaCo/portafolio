@@ -25,7 +25,45 @@
     });
   }
 
+  function setupHeroScrub() {
+    const video = document.getElementById('hero-video');
+    const cta = document.getElementById('cta-button');
+    const menu = document.getElementById('service-menu');
+    const menuItems = Array.from(document.querySelectorAll('.menu-item'));
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    ScrollTrigger.create({
+      trigger: '#hero-pin-spacer',
+      start: 'top top',
+      end: 'bottom bottom',
+      onUpdate: (self) => {
+        if (video.duration && !Number.isNaN(video.duration)) {
+          video.currentTime = ScrollUtils.mapProgressToTime(self.progress, video.duration);
+        }
+
+        // CTA fades out over the first 5% of the scrub
+        const ctaOpacity = 1 - ScrollUtils.clamp(self.progress / 0.05, 0, 1);
+        cta.style.opacity = ctaOpacity;
+        cta.style.pointerEvents = ctaOpacity > 0.1 ? 'auto' : 'none';
+
+        // Menu fades/slides in over the last 15% of the scrub, staggered per item
+        const menuProgress = ScrollUtils.clamp((self.progress - 0.85) / 0.15, 0, 1);
+        menu.classList.toggle('is-visible', menuProgress > 0);
+        menu.style.opacity = menuProgress > 0 ? 1 : 0;
+
+        menuItems.forEach((item, index) => {
+          const itemStart = index * 0.08;
+          const itemProgress = ScrollUtils.clamp((menuProgress - itemStart) / (1 - itemStart), 0, 1);
+          item.style.opacity = String(0.35 * itemProgress + (item.matches(':hover') ? 0.65 * itemProgress : 0));
+          item.style.transform = `translateX(${(1 - itemProgress) * 24}px)`;
+        });
+      },
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     renderServiceMenu();
+    setupHeroScrub();
   });
 })();
