@@ -40,8 +40,17 @@
     // wins over a stylesheet rule, so they could never actually take effect once this
     // code runs.
     const MENU_ITEM_ROTATIONS = [-2, -1, 0, 1, 2];
+    const VIDEO_FRAME_RATE = 24;
+    const FRAME_DURATION = 1 / VIDEO_FRAME_RATE;
 
     gsap.registerPlugin(ScrollTrigger);
+
+    // Seeking video.currentTime is decoupled from ScrollTrigger's onUpdate (which can
+    // fire faster than the display refresh rate on fast trackpad/wheel input) and instead
+    // applied once per rendered frame via gsap.ticker, snapped to the source video's own
+    // frame boundaries. Redundant seeks to a frame already applied are skipped entirely.
+    let latestProgress = 0;
+    let lastAppliedFrame = -1;
 
     ScrollTrigger.create({
       id: 'hero-scrub',
@@ -49,9 +58,7 @@
       start: 'top top',
       end: 'bottom bottom',
       onUpdate: (self) => {
-        if (video.duration && !Number.isNaN(video.duration)) {
-          video.currentTime = ScrollUtils.mapProgressToTime(self.progress, video.duration);
-        }
+        latestProgress = self.progress;
 
         // CTA fades out over the first 5% of the scrub
         const ctaOpacity = 1 - ScrollUtils.clamp(self.progress / 0.05, 0, 1);
@@ -73,8 +80,19 @@
       },
     });
 
+    gsap.ticker.add(() => {
+      if (!video.duration || Number.isNaN(video.duration)) return;
+      const time = ScrollUtils.mapProgressToTime(latestProgress, video.duration);
+      const frame = Math.round(time / FRAME_DURATION);
+      if (frame !== lastAppliedFrame) {
+        video.currentTime = frame * FRAME_DURATION;
+        lastAppliedFrame = frame;
+      }
+    });
+
     ScrollTrigger.addEventListener('refreshInit', () => {
       video.currentTime = 0;
+      lastAppliedFrame = -1;
     });
 
     window.addEventListener('resize', () => ScrollTrigger.refresh());
