@@ -31,6 +31,16 @@
     const menu = document.getElementById('service-menu');
     const menuItems = Array.from(document.querySelectorAll('.menu-item'));
 
+    // Per-item rotation (deg), matching nth-child(1..5) in css/style.css. This array is
+    // now the single source of truth for per-item tilt: onUpdate below overwrites each
+    // item's inline `transform` every tick (to drive the translateX slide-in), which
+    // would otherwise silently discard any rotation set via CSS. Previously this tilt
+    // was duplicated as `.menu-item:nth-child(n) { transform: rotate(...) }` rules in
+    // css/style.css (Task 7); those rules were removed since an inline style always
+    // wins over a stylesheet rule, so they could never actually take effect once this
+    // code runs.
+    const MENU_ITEM_ROTATIONS = [-2, -1, 0, 1, 2];
+
     gsap.registerPlugin(ScrollTrigger);
 
     ScrollTrigger.create({
@@ -56,7 +66,8 @@
           const itemStart = index * 0.08;
           const itemProgress = ScrollUtils.clamp((menuProgress - itemStart) / (1 - itemStart), 0, 1);
           item.style.opacity = String(0.35 * itemProgress + (item.matches(':hover') ? 0.65 * itemProgress : 0));
-          item.style.transform = `translateX(${(1 - itemProgress) * 24}px)`;
+          const rotation = MENU_ITEM_ROTATIONS[index] || 0;
+          item.style.transform = `rotate(${rotation}deg) translateX(${(1 - itemProgress) * 24}px)`;
         });
       },
     });

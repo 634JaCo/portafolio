@@ -130,9 +130,8 @@ a {
   opacity: 1;
 }
 
-/* leve inclinación aleatoria por ítem, fiel a la referencia visual */
-.menu-item:nth-child(1) { transform: rotate(-2deg); }
-.menu-item:nth-child(2) { transform: rotate(-1deg); }
-.menu-item:nth-child(3) { transform: rotate(0deg); }
-.menu-item:nth-child(4) { transform: rotate(1deg); }
-.menu-item:nth-child(5) { transform: rotate(2deg); }
+/* Per-item "leve inclinación aleatoria" tilt is applied inline by js/main.js
+   (MENU_ITEM_ROTATIONS in setupHeroScrub), composed with the scroll-driven
+   translateX on every ScrollTrigger tick. An inline style always wins over a
+   stylesheet rule, so a CSS nth-child rotate() rule here would never actually
+   take effect — see js/main.js for the single source of truth. */
