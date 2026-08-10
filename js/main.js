@@ -44,6 +44,7 @@
     gsap.registerPlugin(ScrollTrigger);
 
     ScrollTrigger.create({
+      id: 'hero-scrub',
       trigger: '#hero-pin-spacer',
       start: 'top top',
       end: 'bottom bottom',
@@ -167,9 +168,32 @@
     });
   }
 
+  function jumpHeroToEnd() {
+    const spacer = document.getElementById('hero-pin-spacer');
+    const trigger = ScrollTrigger.getById('hero-scrub') || ScrollTrigger.getAll()
+      .find((st) => st.trigger === spacer);
+    if (trigger) {
+      trigger.scroll(trigger.end);
+      ScrollTrigger.update();
+    }
+  }
+
+  function handleHashChange() {
+    const validIds = CATEGORIES.map((category) => category.id);
+    const id = Router.parseCategoryFromHash(location.hash, validIds);
+    if (id) {
+      jumpHeroToEnd();
+      openCategoryPanel(id);
+    } else {
+      closeCategoryPanel();
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     renderServiceMenu();
     setupHeroScrub();
     setupPanelInteractions();
+    window.addEventListener('popstate', handleHashChange);
+    handleHashChange();
   });
 })();
