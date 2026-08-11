@@ -350,33 +350,27 @@ a {
   }
 }
 
-#about {
-  min-height: 60vh;
+.about-links {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 16px;
-  padding: 10% 8%;
-  max-width: 720px;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
-#about h2 {
-  font-size: 13px;
-  letter-spacing: 2px;
+.about-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 24px;
+  border: 1px solid var(--color-ink);
+  border-radius: 999px;
+  font-size: 12px;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  color: var(--color-muted);
+  text-decoration: none;
+  color: var(--color-ink);
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
-#about p {
-  font-size: 20px;
-  line-height: 1.5;
-}
-
-#about .contact {
-  font-size: 14px;
-  color: var(--color-muted);
-}
-
-#about .contact a {
-  text-decoration: underline;
+.about-link:hover {
+  background: var(--color-ink);
+  color: var(--color-bg);
 }

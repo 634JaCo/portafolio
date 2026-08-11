@@ -1,22 +1,29 @@
 (function () {
+  const ABOUT_ID = 'sobre-mi';
+
   function renderServiceMenu() {
     const list = document.getElementById('service-menu-list');
     list.innerHTML = '';
 
-    CATEGORIES.forEach((category) => {
+    const entries = [
+      { id: ABOUT_ID, label: 'Sobre mí' },
+      ...CATEGORIES.map((category) => ({ id: category.id, label: category.label })),
+    ];
+
+    entries.forEach((entry) => {
       const li = document.createElement('li');
       li.className = 'menu-item';
-      li.dataset.categoryId = category.id;
+      li.dataset.categoryId = entry.id;
 
       const link = document.createElement('a');
-      link.href = Router.buildHashForCategory(category.id);
+      link.href = Router.buildHashForCategory(entry.id);
 
       const arrow = document.createElement('span');
       arrow.className = 'arrow';
       arrow.textContent = '→';
 
       const label = document.createElement('span');
-      label.textContent = category.label;
+      label.textContent = entry.label;
 
       link.appendChild(arrow);
       link.appendChild(label);
@@ -154,19 +161,12 @@
     });
   }
 
-  function openCategoryPanel(id) {
-    const category = findCategory(id);
-    if (!category) return;
-
-    renderCategoryPanel(category);
-
-    const panel = document.getElementById('category-panel');
+  function slideInPanel(panel) {
     panel.hidden = false;
     gsap.fromTo(panel, { xPercent: 100 }, { xPercent: 0, duration: 0.5, ease: 'power2.out' });
   }
 
-  function closeCategoryPanel() {
-    const panel = document.getElementById('category-panel');
+  function slideOutPanel(panel) {
     gsap.to(panel, {
       xPercent: 100,
       duration: 0.4,
@@ -177,6 +177,31 @@
     });
   }
 
+  function openCategoryPanel(id) {
+    const category = findCategory(id);
+    if (!category) return;
+
+    renderCategoryPanel(category);
+    slideInPanel(document.getElementById('category-panel'));
+  }
+
+  function closeCategoryPanel() {
+    slideOutPanel(document.getElementById('category-panel'));
+  }
+
+  function openAboutPanel() {
+    slideInPanel(document.getElementById('about-panel'));
+  }
+
+  function closeAboutPanel() {
+    slideOutPanel(document.getElementById('about-panel'));
+  }
+
+  function closeAllPanels() {
+    closeCategoryPanel();
+    closeAboutPanel();
+  }
+
   function setupPanelInteractions() {
     document.getElementById('service-menu-list').addEventListener('click', (event) => {
       const link = event.target.closest('a[href^="#"]');
@@ -184,12 +209,21 @@
       event.preventDefault();
       const id = link.getAttribute('href').replace(/^#/, '');
       history.pushState(null, '', Router.buildHashForCategory(id));
-      openCategoryPanel(id);
+      if (id === ABOUT_ID) {
+        openAboutPanel();
+      } else {
+        openCategoryPanel(id);
+      }
     });
 
     document.getElementById('panel-close').addEventListener('click', () => {
       history.pushState(null, '', location.pathname + location.search);
       closeCategoryPanel();
+    });
+
+    document.getElementById('about-panel-close').addEventListener('click', () => {
+      history.pushState(null, '', location.pathname + location.search);
+      closeAboutPanel();
     });
   }
 
@@ -204,13 +238,17 @@
   }
 
   function handleHashChange() {
-    const validIds = CATEGORIES.map((category) => category.id);
+    const validIds = [ABOUT_ID, ...CATEGORIES.map((category) => category.id)];
     const id = Router.parseCategoryFromHash(location.hash, validIds);
-    if (id) {
+
+    closeAllPanels();
+
+    if (id === ABOUT_ID) {
+      jumpHeroToEnd();
+      openAboutPanel();
+    } else if (id) {
       jumpHeroToEnd();
       openCategoryPanel(id);
-    } else {
-      closeCategoryPanel();
     }
   }
 
