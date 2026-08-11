@@ -31,9 +31,24 @@ a {
   color: inherit;
 }
 
+/* Applied to html + body while the 'play-through' hero mode (js/main.js,
+   HERO_INTERACTION_MODE) is autoplaying the video, so the page can't be
+   scrolled past mid-animation. */
+html.scroll-locked,
+body.scroll-locked {
+  overflow: hidden;
+  height: 100%;
+}
+
 #hero-pin-spacer {
   height: 250vh;
   position: relative;
+}
+
+/* 'play-through' mode has no scroll-to-frame mapping, so it doesn't need scroll
+   runway beyond the hero's own height. */
+body.hero-mode-playthrough #hero-pin-spacer {
+  height: 100vh;
 }
 
 #hero-sticky {

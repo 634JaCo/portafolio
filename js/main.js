@@ -1,6 +1,28 @@
 (function () {
   const ABOUT_ID = 'sobre-mi';
 
+  // Hero interaction mode — flip this one constant to switch, nothing else to touch.
+  // 'scroll-scrub'  (default) — current/proven behavior: scroll position maps directly
+  //                              to video frame (setupHeroScrub), menu reveals over the
+  //                              last 15% of the pinned scroll range.
+  // 'play-through'  (experimental) — a single scroll/wheel/key gesture plays the video
+  //                              start-to-finish on its own; the menu reveals once
+  //                              playback ends (setupHeroPlayThrough). Scroll is locked
+  //                              for the duration of playback so the user can't scroll
+  //                              past it mid-animation.
+  const HERO_INTERACTION_MODE = 'play-through';
+
+  // Resting rotation shared by every menu item, matching .menu-item in css/style.css so
+  // the whole list leans uniformly instead of each item tilting differently. Shared by
+  // both hero modes below.
+  const MENU_ITEM_REST_ROTATION = -4;
+
+  // Whether the 'play-through' hero mode's one-shot video playback has already been
+  // triggered (by a scroll/wheel/key gesture or by jumping straight to it via a hash
+  // deep-link) — shared between setupHeroPlayThrough and jumpHeroToEnd so a leftover
+  // scroll/wheel listener can't replay the intro after the video has already resolved.
+  let heroPlaybackStarted = false;
+
   function renderServiceMenu() {
     const list = document.getElementById('service-menu-list');
     list.innerHTML = '';
@@ -38,12 +60,6 @@
     const menu = document.getElementById('service-menu');
     const menuItems = Array.from(document.querySelectorAll('.menu-item'));
 
-    // Resting rotation shared by every item, matching .menu-item in css/style.css so
-    // the whole list leans uniformly instead of each item tilting differently. Used
-    // only while an item is still sliding in (below); once an item's entrance
-    // finishes, its inline transform/opacity are cleared so the CSS rules (and the
-    // :hover override that snaps it level) take over.
-    const MENU_ITEM_REST_ROTATION = -4;
     const VIDEO_FRAME_RATE = 24;
     const FRAME_DURATION = 1 / VIDEO_FRAME_RATE;
 
@@ -104,6 +120,87 @@
     });
 
     window.addEventListener('resize', () => ScrollTrigger.refresh());
+  }
+
+  // Experimental alternative to setupHeroScrub — see HERO_INTERACTION_MODE above.
+  // Scroll is locked until the video finishes playing on its own; the first scroll/wheel/
+  // key gesture (allowed because the video is muted, so autoplay restrictions don't apply)
+  // kicks off playback, and the menu reveals via a GSAP timeline once it ends, instead of
+  // being driven by scroll progress.
+  function setupHeroPlayThrough() {
+    const video = document.getElementById('hero-video');
+    const cta = document.getElementById('cta-button');
+    const menu = document.getElementById('service-menu');
+    const menuItems = Array.from(document.querySelectorAll('.menu-item'));
+
+    document.body.classList.add('hero-mode-playthrough');
+    lockScroll();
+
+    function startPlayback() {
+      if (heroPlaybackStarted) return;
+      heroPlaybackStarted = true;
+      gsap.to(cta, { opacity: 0, duration: 0.3 });
+      cta.style.pointerEvents = 'none';
+      video.play();
+    }
+
+    function onScrollIntent(event) {
+      if (heroPlaybackStarted) return;
+      event.preventDefault();
+      startPlayback();
+    }
+
+    window.addEventListener('wheel', onScrollIntent, { passive: false });
+    window.addEventListener('touchmove', onScrollIntent, { passive: false });
+    window.addEventListener('keydown', (event) => {
+      if (['ArrowDown', 'PageDown', ' '].includes(event.key)) onScrollIntent(event);
+    });
+
+    video.addEventListener('ended', () => {
+      unlockScroll();
+      revealMenuAnimated(menu, menuItems);
+    });
+  }
+
+  function lockScroll() {
+    document.documentElement.classList.add('scroll-locked');
+    document.body.classList.add('scroll-locked');
+  }
+
+  function unlockScroll() {
+    document.documentElement.classList.remove('scroll-locked');
+    document.body.classList.remove('scroll-locked');
+  }
+
+  // Staggered menu entrance driven by a GSAP timeline instead of scroll progress — used
+  // by the 'play-through' hero mode once the video finishes.
+  function revealMenuAnimated(menu, menuItems) {
+    menu.classList.add('is-visible');
+    gsap.to(menu, { opacity: 1, duration: 0.3 });
+
+    menuItems.forEach((item, index) => {
+      gsap.fromTo(
+        item,
+        { opacity: 0, x: -24, rotation: MENU_ITEM_REST_ROTATION },
+        {
+          opacity: 1,
+          x: 0,
+          rotation: MENU_ITEM_REST_ROTATION,
+          duration: 0.45,
+          ease: 'power2.out',
+          delay: index * 0.1,
+          onComplete: () => gsap.set(item, { clearProps: 'transform,opacity' }),
+        }
+      );
+    });
+  }
+
+  // Instantly-settled equivalent of revealMenuAnimated, used when deep-linking straight
+  // to a category/about hash in 'play-through' mode — no video playback to wait for.
+  function revealMenuInstant(menu, menuItems) {
+    menu.classList.add('is-visible');
+    gsap.set(menu, { opacity: 1 });
+    menuItems.forEach((item) => gsap.set(item, { clearProps: 'transform,opacity' }));
   }
 
   function findCategory(id) {
@@ -228,6 +325,21 @@
   }
 
   function jumpHeroToEnd() {
+    if (HERO_INTERACTION_MODE === 'play-through') {
+      heroPlaybackStarted = true;
+      const video = document.getElementById('hero-video');
+      if (video.duration) video.currentTime = video.duration;
+      unlockScroll();
+      const cta = document.getElementById('cta-button');
+      gsap.set(cta, { opacity: 0 });
+      cta.style.pointerEvents = 'none';
+      revealMenuInstant(
+        document.getElementById('service-menu'),
+        Array.from(document.querySelectorAll('.menu-item'))
+      );
+      return;
+    }
+
     const spacer = document.getElementById('hero-pin-spacer');
     const trigger = ScrollTrigger.getById('hero-scrub') || ScrollTrigger.getAll()
       .find((st) => st.trigger === spacer);
@@ -254,7 +366,11 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     renderServiceMenu();
-    setupHeroScrub();
+    if (HERO_INTERACTION_MODE === 'play-through') {
+      setupHeroPlayThrough();
+    } else {
+      setupHeroScrub();
+    }
     setupPanelInteractions();
     window.addEventListener('popstate', handleHashChange);
     handleHashChange();
