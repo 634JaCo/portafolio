@@ -123,10 +123,12 @@
   }
 
   // Experimental alternative to setupHeroScrub — see HERO_INTERACTION_MODE above.
-  // Scroll is locked until the video finishes playing on its own; the first scroll/wheel/
-  // key gesture (allowed because the video is muted, so autoplay restrictions don't apply)
-  // kicks off playback, and the menu reveals via a GSAP timeline once it ends, instead of
-  // being driven by scroll progress.
+  // Scroll is locked (via the .scroll-locked CSS class, so no wheel/touch listener is
+  // needed to prevent scrolling) until the video finishes playing on its own. Playback
+  // starts only on a real click on the CTA button — a click is the one gesture every
+  // browser reliably honors for unmuted autoplay, which a wheel/touch/keydown gesture is
+  // not guaranteed to do. The menu reveals via a GSAP timeline once playback ends, instead
+  // of being driven by scroll progress.
   function setupHeroPlayThrough() {
     const video = document.getElementById('hero-video');
     const cta = document.getElementById('cta-button');
@@ -144,17 +146,7 @@
       video.play();
     }
 
-    function onScrollIntent(event) {
-      if (heroPlaybackStarted) return;
-      event.preventDefault();
-      startPlayback();
-    }
-
-    window.addEventListener('wheel', onScrollIntent, { passive: false });
-    window.addEventListener('touchmove', onScrollIntent, { passive: false });
-    window.addEventListener('keydown', (event) => {
-      if (['ArrowDown', 'PageDown', ' '].includes(event.key)) onScrollIntent(event);
-    });
+    cta.addEventListener('click', startPlayback);
 
     video.addEventListener('ended', () => {
       unlockScroll();

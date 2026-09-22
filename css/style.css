@@ -83,6 +83,7 @@ body.hero-mode-playthrough #hero-pin-spacer {
   font-size: 13px;
   letter-spacing: 1px;
   text-transform: uppercase;
+  cursor: pointer;
   z-index: 2;
 }
 
