@@ -7,22 +7,22 @@
       description,
       featuredImage: `assets/img/${id}-featured.jpg`,
       projects: [1, 2, 3, 4].map((n) => ({
-        title: `Proyecto ${label} ${n}`,
+        title: `${label} Project ${n}`,
         image: `assets/img/${id}-${n}.jpg`,
       })),
       largeBlocks: [
-        { title: 'Trabajo reciente', image: `assets/img/${id}-large-1.jpg` },
-        { title: 'Cliente destacado', image: `assets/img/${id}-large-2.jpg` },
+        { title: 'Recent Work', image: `assets/img/${id}-large-1.jpg` },
+        { title: 'Featured Client', image: `assets/img/${id}-large-2.jpg` },
       ],
     };
   }
 
   const CATEGORIES = [
-    makeCategory('branding', 'Branding', 'Identidad visual completa: logo, paleta, tipografía y sistema de marca. [Texto de ejemplo — reemplázalo con tu propia descripción.]'),
-    makeCategory('content-creator', 'Content Creator', 'Producción de contenido para redes y campañas: dirección de arte, edición y guion. [Texto de ejemplo — reemplázalo con tu propia descripción.]'),
-    makeCategory('b2b-design', 'B2B Design', 'Diseño para negocios: presentaciones, pitch decks, material comercial. [Texto de ejemplo — reemplázalo con tu propia descripción.]'),
-    makeCategory('web-design', 'Web Design', 'Diseño y desarrollo de sitios web e interfaces digitales. [Texto de ejemplo — reemplázalo con tu propia descripción.]'),
-    makeCategory('ai-creator', 'AI Creator', 'Producción visual asistida por IA: imagen, video y assets generativos. [Texto de ejemplo — reemplázalo con tu propia descripción.]'),
+    makeCategory('branding', 'Branding', 'Complete visual identity: logo, color palette, typography, and brand system. [Sample text — replace with your own description.]'),
+    makeCategory('content-creator', 'Content Creator', 'Content production for social media and campaigns: art direction, editing, and scriptwriting. [Sample text — replace with your own description.]'),
+    makeCategory('b2b-design', 'B2B Design', 'Design for business: presentations, pitch decks, commercial materials. [Sample text — replace with your own description.]'),
+    makeCategory('web-design', 'Web Design', 'Design and development of websites and digital interfaces. [Sample text — replace with your own description.]'),
+    makeCategory('ai-creator', 'AI Creator', 'AI-assisted visual production: image, video, and generative assets. [Sample text — replace with your own description.]'),
   ];
 
   if (typeof module !== 'undefined' && module.exports) {

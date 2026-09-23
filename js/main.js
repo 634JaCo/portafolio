@@ -1,5 +1,5 @@
 (function () {
-  const ABOUT_ID = 'sobre-mi';
+  const ABOUT_ID = 'about';
 
   // Hero interaction mode — flip this one constant to switch, nothing else to touch.
   // 'scroll-scrub'  (default) — current/proven behavior: scroll position maps directly
@@ -28,7 +28,7 @@
     list.innerHTML = '';
 
     const entries = [
-      { id: ABOUT_ID, label: 'Sobre mí' },
+      { id: ABOUT_ID, label: 'About Me' },
       ...CATEGORIES.map((category) => ({ id: category.id, label: category.label })),
     ];
 

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio — Diseño Gráfico</title>
+  <title>Portfolio — Graphic Design</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -16,9 +16,9 @@
           <source src="assets/video/hero-pan.mp4">
         </video>
 
-        <button id="cta-button" type="button">Conocer portafolio ↓</button>
+        <button id="cta-button" type="button">View portfolio ↓</button>
 
-        <nav id="service-menu" aria-label="Servicios">
+        <nav id="service-menu" aria-label="Services">
           <ul id="service-menu-list"></ul>
         </nav>
       </div>
@@ -27,19 +27,48 @@
 
   <div id="about-panel" class="category-panel" hidden>
     <div class="panel-topbar">
-      <button id="about-panel-close" type="button">← volver</button>
+      <button id="about-panel-close" type="button">← back</button>
     </div>
     <div class="panel-header">
       <div class="panel-featured-image">
-        <img src="assets/img/about-me.jpg" alt="Juan Jacobo — técnico en diseño gráfico">
+        <img src="assets/img/about-me.jpg" alt="Juan Jacobo — graphic design technician">
       </div>
       <div class="panel-intro">
-        <p class="panel-label">Sobre mí</p>
+        <p class="panel-label">About Me</p>
         <h2>Juan Jacobo</h2>
-        <p>Técnico en diseño gráfico — Unitécnica, Manizales.</p>
+        <p>Graphic Design Technician — Unitécnica, Manizales.</p>
       </div>
     </div>
-    <p class="section-label">Contacto</p>
+    <p class="section-label">Tool Stack</p>
+    <div class="tool-stack">
+      <div class="tool-group">
+        <p class="tool-group-label">Graphic Design Tools</p>
+        <div class="tool-logos">
+          <div class="tool-logo"><img src="assets/img/tools/illustrator.png" alt="Adobe Illustrator"><span>Illustrator</span></div>
+          <div class="tool-logo"><img src="assets/img/tools/photoshop.png" alt="Adobe Photoshop"><span>Photoshop</span></div>
+          <div class="tool-logo"><img src="assets/img/tools/canva.png" alt="Canva"><span>Canva</span></div>
+          <div class="tool-logo"><img src="assets/img/tools/affinity.png" alt="Affinity"><span>Affinity</span></div>
+        </div>
+      </div>
+      <div class="tool-group">
+        <p class="tool-group-label">Audiovisual Tools</p>
+        <div class="tool-logos">
+          <div class="tool-logo"><img src="assets/img/tools/capcut.png" alt="CapCut"><span>CapCut</span></div>
+          <div class="tool-logo"><img src="assets/img/tools/davinci-resolve.png" alt="DaVinci Resolve"><span>DaVinci Resolve</span></div>
+        </div>
+      </div>
+      <div class="tool-group">
+        <p class="tool-group-label">AI Tools</p>
+        <div class="tool-logos">
+          <div class="tool-logo"><img src="assets/img/tools/claude.png" alt="Claude"><span>Claude</span></div>
+          <div class="tool-logo"><img src="assets/img/tools/gemini.png" alt="Gemini"><span>Gemini</span></div>
+          <div class="tool-logo"><img src="assets/img/tools/google-flow.png" alt="Google Flow"><span>Google Flow</span></div>
+          <div class="tool-logo"><img src="assets/img/tools/higgsfield.png" alt="Higgsfield"><span>Higgsfield</span></div>
+          <div class="tool-logo"><img src="assets/img/tools/magnific.png" alt="Magnific"><span>Magnific</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="section-label">Contact</p>
     <div class="about-links">
       <a class="about-link" href="https://wa.me/573022740249" target="_blank" rel="noopener">WhatsApp</a>
       <a class="about-link" href="https://www.instagram.com/j_j.p_p/" target="_blank" rel="noopener">Instagram</a>
@@ -49,7 +78,7 @@
 
   <div id="category-panel" class="category-panel" hidden>
     <div class="panel-topbar">
-      <button id="panel-close" type="button">← volver</button>
+      <button id="panel-close" type="button">← back</button>
     </div>
     <div class="panel-header">
       <div class="panel-featured-image">
@@ -61,7 +90,7 @@
         <p id="panel-description"></p>
       </div>
     </div>
-    <p class="section-label">Proyectos seleccionados</p>
+    <p class="section-label">Selected Projects</p>
     <div class="panel-projects" id="panel-projects"></div>
     <div class="panel-large-blocks" id="panel-large-blocks"></div>
   </div>
