@@ -258,12 +258,51 @@ body.hero-mode-playthrough #hero-pin-spacer {
   margin: 0;
 }
 
-.panel-projects img {
+.project-media-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.project-media {
+  position: relative;
+  overflow: hidden;
+}
+
+.panel-projects .project-media img {
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
   background: #d9d6d0;
   display: block;
+  transition: transform 0.35s ease;
+}
+
+.project-media-link:hover .project-media img,
+.project-media-link:focus-visible .project-media img {
+  transform: scale(1.04);
+}
+
+.view-hint {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  text-align: center;
+  background: rgba(23, 22, 20, 0.55);
+  color: #fff;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.project-media-link:hover .view-hint,
+.project-media-link:focus-visible .view-hint {
+  opacity: 1;
 }
 
 .panel-projects figcaption {
@@ -286,12 +325,13 @@ body.hero-mode-playthrough #hero-pin-spacer {
   overflow: hidden;
 }
 
-.large-block img {
+.large-block .project-media img {
   width: 100%;
   height: 340px;
   object-fit: cover;
   background: #d9d6d0;
   display: block;
+  transition: transform 0.35s ease;
 }
 
 .large-block::after {

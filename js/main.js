@@ -208,6 +208,20 @@
     imgEl.src = src;
   }
 
+  // Wraps an element in a new-tab link to the project's full PDF/video/site when one is
+  // given, so clicking a thumbnail opens the complete piece instead of just the preview
+  // image. Returns the element itself, unwrapped, if there's nothing to link to.
+  function wrapInLink(el, href, className) {
+    if (!href) return el;
+    const anchor = document.createElement('a');
+    anchor.href = href;
+    anchor.target = '_blank';
+    anchor.rel = 'noopener';
+    anchor.className = className;
+    anchor.appendChild(el);
+    return anchor;
+  }
+
   function renderCategoryPanel(category) {
     document.getElementById('panel-label').textContent = category.label;
     document.getElementById('panel-title').textContent = category.title;
@@ -222,11 +236,21 @@
     projectsEl.innerHTML = '';
     category.projects.forEach((project) => {
       const figure = document.createElement('figure');
+
+      const media = document.createElement('div');
+      media.className = 'project-media';
       const img = document.createElement('img');
       setImageWithFallback(img, project.image, project.title);
+      const hint = document.createElement('span');
+      hint.className = 'view-hint';
+      hint.textContent = 'View full project ↗';
+      media.appendChild(img);
+      media.appendChild(hint);
+
       const caption = document.createElement('figcaption');
       caption.textContent = project.title;
-      figure.appendChild(img);
+
+      figure.appendChild(wrapInLink(media, project.link, 'project-media-link'));
       figure.appendChild(caption);
       projectsEl.appendChild(figure);
     });
@@ -237,14 +261,21 @@
       const wrapper = document.createElement('div');
       wrapper.className = 'large-block';
 
+      const media = document.createElement('div');
+      media.className = 'project-media';
       const img = document.createElement('img');
       setImageWithFallback(img, block.image, block.title);
+      const hint = document.createElement('span');
+      hint.className = 'view-hint';
+      hint.textContent = 'View full project ↗';
+      media.appendChild(img);
+      media.appendChild(hint);
 
       const label = document.createElement('span');
       label.className = 'large-block-label';
       label.textContent = block.title;
 
-      wrapper.appendChild(img);
+      wrapper.appendChild(wrapInLink(media, block.link, 'project-media-link'));
       wrapper.appendChild(label);
       blocksEl.appendChild(wrapper);
     });

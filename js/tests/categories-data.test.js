@@ -26,12 +26,14 @@ test('every category has the required shape', () => {
     for (const project of category.projects) {
       assert.equal(typeof project.title, 'string');
       assert.equal(typeof project.image, 'string');
+      assert.equal(typeof project.link, 'string');
     }
     assert.equal(Array.isArray(category.largeBlocks), true);
     assert.equal(category.largeBlocks.length, 2);
     for (const block of category.largeBlocks) {
       assert.equal(typeof block.title, 'string');
       assert.equal(typeof block.image, 'string');
+      assert.equal(typeof block.link, 'string');
     }
   }
 });
