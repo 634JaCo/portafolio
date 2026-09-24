@@ -251,11 +251,13 @@
   }
 
   function slideInPanel(panel) {
+    gsap.killTweensOf(panel);
     panel.hidden = false;
     gsap.fromTo(panel, { xPercent: 100 }, { xPercent: 0, duration: 0.5, ease: 'power2.out' });
   }
 
   function slideOutPanel(panel) {
+    gsap.killTweensOf(panel);
     gsap.to(panel, {
       xPercent: 100,
       duration: 0.4,
